@@ -1,5 +1,6 @@
 # LootExtra
 
-## Current State
-
-1.16.x basic finished, porting to 1.17.x and 1.18.x.
+## v0.1.0
+* Completed, working on testing and creating wiki.
+* Added loot injectors and loot modifiers.
+* Added builtin loot injectors: add functions, add pools, add pool conditions, add pool functions, add pool entries.
