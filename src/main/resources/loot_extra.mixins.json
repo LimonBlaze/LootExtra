@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "limonblaze.lootextra.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "LootManagerMixin",
+    "LootTableMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
