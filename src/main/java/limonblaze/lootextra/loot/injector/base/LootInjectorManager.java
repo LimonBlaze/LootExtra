@@ -22,6 +22,7 @@ import net.minecraft.tag.ServerTagManagerHolder;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.registry.Registry;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -48,7 +49,7 @@ public class LootInjectorManager implements SimpleSynchronousResourceReloadListe
         this.lootManager = lootManager;
     }
 
-    public void apply(ResourceManager manager) {
+    public void reload(ResourceManager manager) {
         //Inspect the needed loot manager's presence
         if(this.lootManager == null) return;
         //Clear caches
@@ -139,7 +140,7 @@ public class LootInjectorManager implements SimpleSynchronousResourceReloadListe
     public static List<Identifier> tablesFromBlockTag(Identifier type, JsonObject json, Collection<Identifier> allTableIds) {
         if(type.equals(LootExtra.identifier("blocks"))) {
             Identifier name = Identifier.tryParse(JsonHelper.getString(json, "name"));
-            Tag<Block> tag = ServerTagManagerHolder.getTagManager().getBlocks().getTag(name);
+            Tag<Block> tag = ServerTagManagerHolder.getTagManager().getOrCreateTagGroup(Registry.BLOCK_KEY).getTag(name);
             if(tag == null) {
                 LootExtra.LOGGER.error("Invalid block tag {} found on loading loot tables for loot injector", name);
                 return new ArrayList<>();
@@ -153,7 +154,7 @@ public class LootInjectorManager implements SimpleSynchronousResourceReloadListe
     public static List<Identifier> tablesFromEntityTypeTag(Identifier type, JsonObject json, Collection<Identifier> allTableIds) {
         if(type.equals(LootExtra.identifier("entity_types"))) {
             Identifier name = Identifier.tryParse(JsonHelper.getString(json, "name"));
-            Tag<EntityType<?>> tag = ServerTagManagerHolder.getTagManager().getEntityTypes().getTag(name);
+            Tag<EntityType<?>> tag = ServerTagManagerHolder.getTagManager().getOrCreateTagGroup(Registry.ENTITY_TYPE_KEY).getTag(name);
             if(tag == null) {
                 LootExtra.LOGGER.error("Invalid entity type tag {} found on loading loot tables for loot injector", name);
                 return new ArrayList<>();

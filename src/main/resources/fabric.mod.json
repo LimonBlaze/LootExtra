@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "loot_extra",
-  "version": "${version}",
+  "version": "0.1.0",
 
   "name": "Loot Extra",
   "description": "A lib providing data driven loot injectors and modifiers for mod and modpack developers.",
@@ -11,6 +11,11 @@
   "contact": {
     "homepage": "https://github.com/LimonBlaze",
     "sources": "https://github.com/LimonBlaze/LootExtra"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": ["library"]
+    }
   },
 
   "license": "MIT",
@@ -27,8 +32,9 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
+    "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.16.x"
+    "minecraft": "1.17.x",
+    "java": ">=16"
   }
 }

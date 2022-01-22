@@ -40,7 +40,7 @@ public class LootModifierManager implements SimpleSynchronousResourceReloadListe
         return this.modifiers;
     }
 
-    public void apply(ResourceManager manager) {
+    public void reload(ResourceManager manager) {
         //Clear caches
         this.modifiers.clear();
         //Collect data dirven modfidiers
