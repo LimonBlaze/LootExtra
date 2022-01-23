@@ -26,7 +26,6 @@ public class AddFunctionsInjector extends LootInjector {
     public LootInjectorType<?> getType() {
         return LootInjectorType.ADD_FUNCTIONS;
     }
-
     public void inject(Identifier id, FabricLootSupplierBuilder lootTable) {
         lootTable.withFunctions(this.functions);
     }
@@ -38,7 +37,7 @@ public class AddFunctionsInjector extends LootInjector {
     public static AddFunctionsInjector fromJson(Identifier id, JsonObject context) {
         List<LootFunction> functions = new ArrayList<>();
         try {
-            JsonArray jsonArray = JsonHelper.getArray(context, "pools");
+            JsonArray jsonArray = JsonHelper.getArray(context, "functions");
             for(JsonElement element : jsonArray) {
                 functions.add(LootJsonParser.read(element.toString(), LootFunction.class));
             }
