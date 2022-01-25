@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "loot_extra",
-  "version": "0.1.1",
+  "version": "${version}",
 
   "name": "Loot Extra",
   "description": "A lib providing data driven loot injectors and modifiers for mod and modpack developers.",
