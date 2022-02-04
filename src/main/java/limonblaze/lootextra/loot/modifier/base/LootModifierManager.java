@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootGsons;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -36,8 +37,14 @@ public class LootModifierManager implements SimpleSynchronousResourceReloadListe
         return Arrays.asList(ResourceReloadListenerKeys.LOOT_TABLES, ResourceReloadListenerKeys.TAGS);
     }
 
-    public List<LootModifier> getModifiers() {
-        return this.modifiers;
+    public List<LootModifier> getActiveModifiers(LootContext context) {
+        return this.modifiers.stream()
+                .filter(modifier -> modifier.shouldApply(context))
+                .collect(Collectors.toList());
+    }
+
+    public void applyModifiers(List<ItemStack> loots, LootContext context) {
+        this.getActiveModifiers(context).forEach(lootModifier -> lootModifier.modify(loots, context));
     }
 
     public void reload(ResourceManager manager) {
