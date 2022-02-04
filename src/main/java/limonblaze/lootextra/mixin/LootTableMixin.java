@@ -20,8 +20,7 @@ public class LootTableMixin {
     private void lootExtra$applyLootModifiers(LootTable lootTable, LootContext context, Consumer<ItemStack> lootConsumer) {
         List<ItemStack> newLoot = new ArrayList<>();
         lootTable.generateUnprocessedLoot(context, newLoot::add);
-        LootExtra.MODIFIER_MANAGER.applyModifiers(newLoot, context);
-        newLoot.forEach(lootConsumer);
+        LootExtra.MODIFIER_MANAGER.applyModifiers(newLoot, context).forEach(lootConsumer);
     }
 
 }

@@ -43,8 +43,12 @@ public class LootModifierManager implements SimpleSynchronousResourceReloadListe
                 .collect(Collectors.toList());
     }
 
-    public void applyModifiers(List<ItemStack> loots, LootContext context) {
-        this.getActiveModifiers(context).forEach(lootModifier -> lootModifier.modify(loots, context));
+    public List<ItemStack> applyModifiers(List<ItemStack> loots, LootContext context) {
+        List<ItemStack> modifiedLoots = new ArrayList<>(loots);
+        for(LootModifier modifier : this.getActiveModifiers(context)) {
+            modifiedLoots = modifier.modify(loots, context);
+        }
+        return modifiedLoots;
     }
 
     public void reload(ResourceManager manager) {
